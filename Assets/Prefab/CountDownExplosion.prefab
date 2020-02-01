@@ -111,7 +111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   countDownText: {fileID: 873472361601442663}
-  countDownTime: 1
+  countDownTime: 5
   explosionForce: 1000
   explosionRadius: 100
   gameTimer: {fileID: 0}
