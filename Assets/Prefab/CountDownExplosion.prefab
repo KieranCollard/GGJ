@@ -112,8 +112,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   countDownText: {fileID: 873472361601442663}
   countDownTime: 5
-  explosionForce: 1000
-  explosionRadius: 100
+  explosionForce: 20000
+  explosionRadius: 3
   gameTimer: {fileID: 0}
 --- !u!82 &-673632119181148103
 AudioSource:
