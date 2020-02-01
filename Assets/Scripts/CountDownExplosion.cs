@@ -10,6 +10,7 @@ public class CountDownExplosion : MonoBehaviour
     public float explosionForce;
     public float explosionRadius;
     public GameObject gameTimer;
+    public GameObject explosionEffect;
     CountDownDisplay displayTimer;
     bool active = false;
     bool played = false;
@@ -19,6 +20,10 @@ public class CountDownExplosion : MonoBehaviour
     }
     AudioSource audio;
     // Start is called before the first frame update
+    private void Awake()
+    {
+        explosionEffect.SetActive(false);
+    }
     void Start()
     {
         Debug.Assert(countDownText != null);
@@ -27,10 +32,12 @@ public class CountDownExplosion : MonoBehaviour
         Debug.Assert(displayTimer != null);
         audio = GetComponent<AudioSource>();
         Debug.Assert(audio != null);
+        Debug.Assert(explosionEffect != null);
+        
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         if(active == false)
         {
@@ -44,6 +51,7 @@ public class CountDownExplosion : MonoBehaviour
             if (played == false)
             {
                 played = true;
+                explosionEffect.SetActive(true);
                 StartCoroutine(audioBeforeDestroy());
             }
         }
@@ -56,6 +64,7 @@ public class CountDownExplosion : MonoBehaviour
         Collider[] colliders = Physics.OverlapSphere(this.transform.position, explosionRadius);
         this.GetComponent<MeshRenderer>().enabled = false;
         this.GetComponent<Collider>().enabled = false;
+        
         foreach (Collider col in colliders)
         {
             Rigidbody rig = col.GetComponent<Rigidbody>();
@@ -64,11 +73,13 @@ public class CountDownExplosion : MonoBehaviour
                 rig.AddExplosionForce(explosionForce, this.transform.position, explosionRadius);
             }
         }
-        while (audio.isPlaying == true)
+
+        Animator anim = explosionEffect.GetComponentInChildren<Animator>();
+        bool donePlaying = anim.GetCurrentAnimatorStateInfo(0).tagHash == 0;  
+        while (audio.isPlaying == true || donePlaying == false)
         {
             yield return null;
         }
-        
         displayTimer.TurnOn();
         Destroy(this.gameObject);
     }
