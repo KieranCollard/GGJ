@@ -17,10 +17,12 @@ public class CountDownDisplay : MonoBehaviour
     public float delayTime = 1;
 
     bool gameOver = false;
+    bool started = false;
 
     public void TurnOn()
     {
         StartCoroutine(Delay());
+        
     }
     // Start is called before the first frame update
     void Start()
@@ -30,10 +32,18 @@ public class CountDownDisplay : MonoBehaviour
         initialString = text.text;
     }
 
+    
+
     private void Update()
     {
         if (active)
         {
+            if (!started)
+            {
+                GameplayManager gameManager = GetComponentInParent<GameplayManager>();
+                gameManager.StartGame();
+                started = true;
+            }
             text.enabled = true;
             timerImage.enabled = true;
             currentTime -= Time.deltaTime;

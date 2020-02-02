@@ -59,8 +59,8 @@ public class TestDetect : MonoBehaviour
 				foreach (Vector3 castDir in castDirections)
 				{
 					Debug.DrawRay(transform.position, castDir, Color.yellow, 0.5f);
-
-					RaycastHit[] hitInfos = Physics.BoxCastAll(transform.position, halfBoxSize, castDir, Quaternion.identity, castDistance);
+                    
+					RaycastHit[] hitInfos = Physics.BoxCastAll(transform.position, halfBoxSize, castDir, transform.rotation, castDistance);
 					foreach (RaycastHit hitInfo in hitInfos)
 					{
 						GameObject otherCube = hitInfo.collider.gameObject;
@@ -217,7 +217,7 @@ public class TestDetect : MonoBehaviour
 	Dictionary<int, GameObject> matchedCubes;
 
 	// Start is called before the first frame update
-	void Start()
+	void Awake()
 	{
 		DetectShape detectShape = null;
 
@@ -324,15 +324,16 @@ public class TestDetect : MonoBehaviour
 		}
 
 
-		SetDetectShape(2);
+		//SetDetectShape(2);
 	}
 
-	bool stopUpdating = false;
+	public bool turnOn = false;
+    public bool finished = false;
 
 	// Update is called once per frame
 	void Update()
 	{
-		if(stopUpdating)
+		if(!turnOn)
 		{
 			return;
 		}
@@ -366,8 +367,9 @@ public class TestDetect : MonoBehaviour
 		if (matches)
 		{
 			Time.timeScale = 0.0f;
-			stopUpdating = true;
+			turnOn = false;
 			Debug.Log("Match!");
+            finished = true;
 		}
 	}
 
@@ -392,7 +394,7 @@ public class TestDetect : MonoBehaviour
 		return allAtRest;
 	}
 
-	void SetDetectShape(int detectShapeNum)
+	public void SetDetectShape(int detectShapeNum)
 	{
 		if(detectShapeNum > detectShapes.Count)
 		{

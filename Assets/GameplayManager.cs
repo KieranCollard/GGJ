@@ -16,6 +16,8 @@ public class GameplayManager : MonoBehaviour
 
     GameObject chosenStructure;
 
+    public TestDetect domtect;
+
     string difficultyKey = "difficulty";
 
     void Start()
@@ -23,9 +25,19 @@ public class GameplayManager : MonoBehaviour
         if (easyStructure != null)
         {
             int difficulty = PlayerPrefs.GetInt(difficultyKey);
+            difficulty = 3;
             chosenStructure = GetStructure(difficulty);
 
             chosenStructure.SetActive(true);
+            domtect.SetDetectShape(difficulty - 1);
+        }
+    }
+
+    private void Update()
+    {
+        if (domtect.finished)
+        {
+            GameOver();
         }
     }
 
@@ -49,4 +61,10 @@ public class GameplayManager : MonoBehaviour
     {
         SceneManager.LoadScene("LeaderboardScene");
     }
+
+    public void StartGame()
+    {
+        domtect.turnOn = true;
+    }
+
 }
