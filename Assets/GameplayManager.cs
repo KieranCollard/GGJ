@@ -25,7 +25,6 @@ public class GameplayManager : MonoBehaviour
         if (easyStructure != null)
         {
             int difficulty = PlayerPrefs.GetInt(difficultyKey);
-            difficulty = 3;
             chosenStructure = GetStructure(difficulty);
 
             chosenStructure.SetActive(true);
