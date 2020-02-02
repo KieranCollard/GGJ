@@ -2,9 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class LeaderboardScript : MonoBehaviour
 {
+    public Button returnButton;
+    private float volume = 1.0f;
+    private float changeScenePauseTime = 1.0f;
+
+    string mainMenuString = "MainMenuScene";
 
     private Transform entryContainer;
     private Transform entryTemplate;
@@ -16,6 +22,8 @@ public class LeaderboardScript : MonoBehaviour
        // SetNootLoser();
         entryContainer = transform.Find("LeaderboardEntryContainer");
         entryTemplate = entryContainer.Find("LeaderboardEntryTemplate");
+
+        Button returnButton = gameObject.GetComponent<Button>();
 
         entryTemplate.gameObject.SetActive(false);
 
@@ -73,6 +81,12 @@ public class LeaderboardScript : MonoBehaviour
             entryTransform.Find("Score").GetComponent<Text>().color = Color.green;
             entryTransform.Find("Name").GetComponent<Text>().color = Color.green;
         }
+
+
+        RectTransform returnButtonRectTransform = returnButton.GetComponent<RectTransform>();
+        returnButtonRectTransform.anchoredPosition = new Vector2(0, -templateHeight * transformList.Count + 10);
+        //returnButton.gameObject.transform as RectTransform;
+        //= returnButtonRectTransform.anchoredPosition.y - 30;
 
         transformList.Add(entryTransform);
     }
@@ -159,9 +173,27 @@ public class LeaderboardScript : MonoBehaviour
         }
     }
 
-    private void SetTemplate()
+    private void SetRetunPosition()
     {
         
     }
+    public void OnMainMenuClicked()
+    {
+        StartCoroutine(LoadGameScene(mainMenuString));
+    }
+
+    IEnumerator LoadGameScene(int sceneToLoad)
+    {
+
+        yield return new WaitForSeconds(changeScenePauseTime);
+        SceneManager.LoadScene(sceneToLoad);
+    }
+    IEnumerator LoadGameScene(string sceneToLoad)
+    {
+        yield return new WaitForSeconds(changeScenePauseTime);
+        SceneManager.LoadScene(sceneToLoad);
+    }
+
+    
 
 }
