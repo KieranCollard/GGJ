@@ -9,10 +9,15 @@ public class CountDownDisplay : MonoBehaviour
 {
     public float initalTime;
     public Text text;
-    public float currentTime;
+    public Image timerImage;
+
+    private float currentTime;
     string initialString;
     bool active = false;
     public float delayTime = 1;
+
+    bool gameOver = false;
+
     public void TurnOn()
     {
         StartCoroutine(Delay());
@@ -25,21 +30,32 @@ public class CountDownDisplay : MonoBehaviour
         initialString = text.text;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (active)
         {
-            text.enabled = true; 
+            text.enabled = true;
+            timerImage.enabled = true;
             currentTime -= Time.deltaTime;
-            if (currentTime < 0)
+            if (currentTime <= 0)
             {
                 currentTime = 0;
+                gameOver = true;
             }
-            text.text = initialString + currentTime.ToString("0.00");
+            timerImage.fillAmount = currentTime / initalTime;
+            text.text = initialString + currentTime.ToString("0");
         }
         else
         {
+            timerImage.enabled = false;
             text.enabled = false;
+        }
+
+        if (gameOver)
+        {
+            active = false;
+            GameplayManager gameManager = GetComponentInParent<GameplayManager>();
+            gameManager.GameOver();
         }
     }
 

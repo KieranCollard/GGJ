@@ -50,8 +50,6 @@ public class PickupController : MonoBehaviour
         {
             BuildCharge();
         }
-
-        
     }
 
     private void BuildCharge()
