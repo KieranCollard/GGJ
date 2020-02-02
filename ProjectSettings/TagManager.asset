@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Pickup
   - PickupCollider
+  - Ground
   layers:
   - Default
   - TransparentFX
