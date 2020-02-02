@@ -17,10 +17,10 @@ public class nootsounds : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonUp("Throw"))
+        /*if (Input.GetButtonUp("Throw"))
         {
             source.PlayOneShot(clip);
-        }
+        }*/
 
 
     }

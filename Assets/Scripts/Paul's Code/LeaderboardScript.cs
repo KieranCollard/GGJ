@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 public class LeaderboardScript : MonoBehaviour
 {
     public Button returnButton;
-    private float volume = 1.0f;
     private float changeScenePauseTime = 1.0f;
 
     string mainMenuString = "MainMenuScene";
@@ -19,7 +18,7 @@ public class LeaderboardScript : MonoBehaviour
         
     private void Awake()
     {
-       // SetNootLoser();
+        
         entryContainer = transform.Find("LeaderboardEntryContainer");
         entryTemplate = entryContainer.Find("LeaderboardEntryTemplate");
 
