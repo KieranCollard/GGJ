@@ -18,7 +18,7 @@ public class LeaderboardScript : MonoBehaviour
         
     private void Awake()
     {
-        
+        Time.timeScale = 1.0f;
         entryContainer = transform.Find("LeaderboardEntryContainer");
         entryTemplate = entryContainer.Find("LeaderboardEntryTemplate");
 
