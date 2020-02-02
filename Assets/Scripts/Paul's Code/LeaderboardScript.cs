@@ -105,7 +105,7 @@ public class LeaderboardScript : MonoBehaviour
         }
         LeaderboardScores leaderboardScores = JsonUtility.FromJson<LeaderboardScores>(jsonString);
 
-
+        SortScores(leaderboardScores.leaderboardEntryList);
 
         //Add new entry to leaderboardScores
         leaderboardScores.leaderboardEntryList.Add(leaderboardEntry);
@@ -156,7 +156,7 @@ public class LeaderboardScript : MonoBehaviour
         public string name;
     }
 
-    private void SortScores(List<LeaderboardEntry> leaderboardEntryList)
+    private static void SortScores(List<LeaderboardEntry> leaderboardEntryList)
     {
         for (int i = 0; i < leaderboardEntryList.Count; i++)
         {

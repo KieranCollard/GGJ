@@ -58,6 +58,13 @@ public class GameplayManager : MonoBehaviour
 
     public void GameOver()
     {
+
+        CountDownDisplay timer = GetComponentInChildren<CountDownDisplay>();
+        float currentTime = timer.currentTime;
+        float maxTime = timer.initalTime;
+        float score = maxTime - currentTime;
+        string name = "You";
+        LeaderboardScript.AddLeaderboardScoreEntry(score, name);
         SceneManager.LoadScene("LeaderboardScene");
     }
 
