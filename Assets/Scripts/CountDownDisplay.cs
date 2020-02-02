@@ -11,7 +11,7 @@ public class CountDownDisplay : MonoBehaviour
     public Text text;
     public Image timerImage;
 
-    private float currentTime;
+    public float currentTime;
     string initialString;
     bool active = false;
     public float delayTime = 1;
