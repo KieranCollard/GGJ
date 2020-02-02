@@ -6,8 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuScript : MonoBehaviour
 {
-    public string DifficultyScene = "DifficultyScene";
-    public string ControlsScene = "Controls";
+    public string difficultyScene = "DifficultyScene";
+    public string leaderboardScene = "LeaderboardScene";
+    //public string ControlsScene = "Controls";
 
     public AudioClip buttonClickSound;
     public AudioSource source;
@@ -21,12 +22,12 @@ public class MainMenuScript : MonoBehaviour
 
     public void OnPlayGameClicked()
     {
-        StartCoroutine(LoadGameScene(1));
+        StartCoroutine(LoadGameScene(difficultyScene));
     }
 
     public void OnLeaderBoardsClicked()
     {
-        StartCoroutine(LoadGameScene(2));
+        StartCoroutine(LoadGameScene(leaderboardScene));
     }
 
     public void OnCreditsClicked()
@@ -47,5 +48,11 @@ public class MainMenuScript : MonoBehaviour
         yield return new WaitForSeconds(changeScenePauseTime);
         SceneManager.LoadScene(sceneToLoad);
     }
+    IEnumerator LoadGameScene(string sceneToLoad)
+    {
 
+        source.PlayOneShot(buttonClickSound, volume);
+        yield return new WaitForSeconds(changeScenePauseTime);
+        SceneManager.LoadScene(sceneToLoad);
+    }
 }
