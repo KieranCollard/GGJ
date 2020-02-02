@@ -37,7 +37,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         {
             if (!m_Jump)
             {
-                m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
+                // Noot Nootin has no need for jump
+                //m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
             }
         }
 
