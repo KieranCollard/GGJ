@@ -26,7 +26,7 @@ public class LeaderboardScript : MonoBehaviour
 
         entryTemplate.gameObject.SetActive(false);
 
-        AddLeaderboardScoreEntry(10000.0f, "Butts");
+        //AddLeaderboardScoreEntry(10000.0f, "Butts");
 
         string jsonString = PlayerPrefs.GetString("leaderboardTable");
         LeaderboardScores leaderboardScores = JsonUtility.FromJson<LeaderboardScores>(jsonString);
@@ -105,12 +105,11 @@ public class LeaderboardScript : MonoBehaviour
         }
         LeaderboardScores leaderboardScores = JsonUtility.FromJson<LeaderboardScores>(jsonString);
 
-        SortScores(leaderboardScores.leaderboardEntryList);
-
         //Add new entry to leaderboardScores
         leaderboardScores.leaderboardEntryList.Add(leaderboardEntry);
+        SortScores(leaderboardScores.leaderboardEntryList);
 
-        while(leaderboardScores.leaderboardEntryList.Count > 15)
+        while (leaderboardScores.leaderboardEntryList.Count > 15)
         {
             leaderboardScores.leaderboardEntryList.RemoveAt(15);
         }
