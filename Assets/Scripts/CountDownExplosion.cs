@@ -7,7 +7,9 @@ public class CountDownExplosion : MonoBehaviour
 {
     public Text countDownText;
     public float countDownTime;
-    public float explosionForce;
+    public float explosionForceMin;
+    public float explosionForceMax;
+
     public float explosionRadius;
     public GameObject gameTimer;
     public GameObject explosionEffect;
@@ -70,7 +72,9 @@ public class CountDownExplosion : MonoBehaviour
             Rigidbody rig = col.GetComponent<Rigidbody>();
             if (rig != null)
             {
-                rig.AddExplosionForce(explosionForce, this.transform.position, explosionRadius);
+                float force = Random.RandomRange(explosionForceMin, explosionForceMax);
+
+                rig.AddExplosionForce(force, this.transform.position, explosionRadius);
             }
         }
 
